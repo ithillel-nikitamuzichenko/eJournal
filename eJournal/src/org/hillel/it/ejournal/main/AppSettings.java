@@ -16,7 +16,7 @@ public class AppSettings {
 			properties.load(propFileStream);
 			propFileStream.close();
 		} catch (IOException ex) {
-			System.err.format("Properties file %0 has not yet created",
+			System.err.format("Properties file %s has not yet created",
 					GLOBALCFGPATH);
 		}
 	}
