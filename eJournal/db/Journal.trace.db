@@ -68,3 +68,697 @@ INSERT INTO `EJournal`.`Users` VALUES (null, 2, null, null, null, `Admin`, `1234
 	at org.h2.server.web.WebThread.process(WebThread.java:166)
 	at org.h2.server.web.WebThread.run(WebThread.java:93)
 	at java.lang.Thread.run(Thread.java:722)
+03-29 17:16:16 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "FK_STUDENTS_CLASSES_IDX"
+Unknown data type: "FK_STUDENTS_CLASSES_IDX"; SQL statement:
+CREATE  TABLE IF NOT EXISTS `EJournal`.`Students` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор студента' ,
+  `UserID` INT NOT NULL ,
+  `ClassID` INT NOT NULL COMMENT 'Индентификатор класса к которому студент принадлежит' ,
+  `GroupID` INT NULL COMMENT 'Номер группы' ,
+  PRIMARY KEY (`ID`) ,
+  INDEX `fk_Students_Classes_idx` (`ClassID` ASC) ,
+  UNIQUE INDEX `StudentID_UNIQUE` (`ID` ASC) ,
+  INDEX `fk_Students_Users1_idx` (`UserID` ASC) ,
+  CONSTRAINT `fk_Students_Classes`
+    FOREIGN KEY (`ClassID` )
+    REFERENCES `EJournal`.`Classes` (`ID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Students_Users1`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `EJournal`.`Users` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION) [50004-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3661)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3524)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5228)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:21:33 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Схема "EJournal" не найдена
+Schema "EJournal" not found; SQL statement:
+CREATE  TABLE IF NOT EXISTS "EJournal"."Students" (
+  "ID" INT NOT NULL AUTO_INCREMENT COMMENT "Идентификатор студента" ,
+  "UserID" INT NOT NULL ,
+  "ClassID" INT NOT NULL COMMENT "Индентификатор класса к которому студент принадлежит" ,
+  "GroupID" INT NULL COMMENT "Номер группы" ,
+  PRIMARY KEY ("ID") ,
+  INDEX "fk_Students_Classes_idx" ("ClassID" ASC) ,
+  UNIQUE INDEX "StudentID_UNIQUE" ("ID" ASC) ,
+  INDEX "fk_Students_Users1_idx" ("UserID" ASC) ,
+  CONSTRAINT "fk_Students_Classes"
+    FOREIGN KEY ("ClassID" )
+    REFERENCES "EJournal"."Classes" ("ID" ),
+  CONSTRAINT "fk_Students_Users1"
+    FOREIGN KEY ("UserID" )
+    REFERENCES "EJournal"."Users" ("UserID" )) [90079-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.getSchema(Parser.java:612)
+	at org.h2.command.Parser.getSchema(Parser.java:619)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5212)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:30:16 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Схема "EJournal" не найдена
+Schema "EJournal" not found; SQL statement:
+CREATE  TABLE IF NOT EXISTS "EJournal"."Students" (
+  "ID" INT NOT NULL AUTO_INCREMENT COMMENT "Идентификатор студента" ,
+  "UserID" INT NOT NULL ,
+  "ClassID" INT NOT NULL COMMENT "Индентификатор класса к которому студент принадлежит" ,
+  "GroupID" INT NULL COMMENT "Номер группы" ,
+  PRIMARY KEY ("ID") ,
+  INDEX "fk_Students_Classes_idx" ("ClassID" ASC) ,
+  UNIQUE INDEX "StudentID_UNIQUE" ("ID" ASC) ,
+  INDEX "fk_Students_Users1_idx" ("UserID" ASC) ,
+  CONSTRAINT "fk_Students_Classes"
+    FOREIGN KEY ("ClassID" )
+    REFERENCES "EJournal"."Classes" ("ID" ),
+  CONSTRAINT "fk_Students_Users1"
+    FOREIGN KEY ("UserID" )
+    REFERENCES "EJournal"."Users" ("UserID" ))
+ AS EJOURNAL [90079-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.getSchema(Parser.java:612)
+	at org.h2.command.Parser.getSchema(Parser.java:619)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5212)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:31:04 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Схема "EJournal" не найдена
+Schema "EJournal" not found; SQL statement:
+CREATE  TABLE IF NOT EXISTS "EJournal"."Students" (
+  "ID" INT NOT NULL AUTO_INCREMENT COMMENT "Идентификатор студента" ,
+  "UserID" INT NOT NULL ,
+  "ClassID" INT NOT NULL COMMENT "Индентификатор класса к которому студент принадлежит" ,
+  "GroupID" INT NULL COMMENT "Номер группы" ,
+  PRIMARY KEY ("ID") ,
+  INDEX "fk_Students_Classes_idx" ("ClassID" ASC) ,
+  UNIQUE INDEX "StudentID_UNIQUE" ("ID" ASC) ,
+  INDEX "fk_Students_Users1_idx" ("UserID" ASC) ,
+  CONSTRAINT "fk_Students_Classes"
+    FOREIGN KEY ("ClassID" )
+    REFERENCES "EJournal"."Classes" ("ID" ),
+  CONSTRAINT "fk_Students_Users1"
+    FOREIGN KEY ("UserID" )
+    REFERENCES "EJournal"."Users" ("UserID" ))
+ AS SELECT SCHEMA EJOURNAL [90079-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.getSchema(Parser.java:612)
+	at org.h2.command.Parser.getSchema(Parser.java:619)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5212)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:32:41 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "USE[*] EJOURNAL"; ожидалось "UPDATE, {"
+Syntax error in SQL statement "USE[*] EJOURNAL"; expected "UPDATE, {"; SQL statement:
+USE EJOURNAL [42001-171]
+03-29 17:32:41 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Схема "EJournal" не найдена
+Schema "EJournal" not found; SQL statement:
+CREATE  TABLE IF NOT EXISTS "EJournal"."Students" (
+  "ID" INT NOT NULL AUTO_INCREMENT COMMENT "Идентификатор студента" ,
+  "UserID" INT NOT NULL ,
+  "ClassID" INT NOT NULL COMMENT "Индентификатор класса к которому студент принадлежит" ,
+  "GroupID" INT NULL COMMENT "Номер группы" ,
+  PRIMARY KEY ("ID") ,
+  INDEX "fk_Students_Classes_idx" ("ClassID" ASC) ,
+  UNIQUE INDEX "StudentID_UNIQUE" ("ID" ASC) ,
+  INDEX "fk_Students_Users1_idx" ("UserID" ASC) ,
+  CONSTRAINT "fk_Students_Classes"
+    FOREIGN KEY ("ClassID" )
+    REFERENCES "EJournal"."Classes" ("ID" ),
+  CONSTRAINT "fk_Students_Users1"
+    FOREIGN KEY ("UserID" )
+    REFERENCES "EJournal"."Users" ("UserID" ))
+ AS SELECT SCHEMA EJOURNAL [90079-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.getSchema(Parser.java:612)
+	at org.h2.command.Parser.getSchema(Parser.java:619)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5212)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:33:47 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EJOURNAL" не найдена
+Table "EJOURNAL" not found; SQL statement:
+UPDATE EJOURNAL
+CREATE  TABLE IF NOT EXISTS "EJournal"."Students" (
+  "ID" INT NOT NULL AUTO_INCREMENT COMMENT "Идентификатор студента" ,
+  "UserID" INT NOT NULL ,
+  "ClassID" INT NOT NULL COMMENT "Индентификатор класса к которому студент принадлежит" ,
+  "GroupID" INT NULL COMMENT "Номер группы" ,
+  PRIMARY KEY ("ID") ,
+  INDEX "fk_Students_Classes_idx" ("ClassID" ASC) ,
+  UNIQUE INDEX "StudentID_UNIQUE" ("ID" ASC) ,
+  INDEX "fk_Students_Users1_idx" ("UserID" ASC) ,
+  CONSTRAINT "fk_Students_Classes"
+    FOREIGN KEY ("ClassID" )
+    REFERENCES "EJournal"."Classes" ("ID" ),
+  CONSTRAINT "fk_Students_Users1"
+    FOREIGN KEY ("UserID" )
+    REFERENCES "EJournal"."Users" ("UserID" ))
+ AS SELECT SCHEMA EJOURNAL [42102-171]
+03-29 17:35:46 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT "; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"
+Syntax error in SQL statement "SELECT "; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"; SQL statement:
+SHOW EJOURNAL [42001-171]
+03-29 17:36:18 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "EJOURNAL" не найдена
+Table "EJOURNAL" not found; SQL statement:
+SELECT * FROM EJOURNAL [42102-171]
+03-29 17:41:23 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "FK_STUDENTS_CLASSES_IDX"
+Unknown data type: "FK_STUDENTS_CLASSES_IDX"; SQL statement:
+CREATE  TABLE IF NOT EXISTS `EJOURNAL`.`Students` (
+  `ID` INT NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор студента' ,
+  `UserID` INT NOT NULL ,
+  `ClassID` INT NOT NULL COMMENT 'Индентификатор класса к которому студент принадлежит' ,
+  `GroupID` INT NULL COMMENT 'Номер группы' ,
+  PRIMARY KEY (`ID`) ,
+  INDEX `fk_Students_Classes_idx` (`ClassID` ASC) ,
+  UNIQUE INDEX `StudentID_UNIQUE` (`ID` ASC) ,
+  INDEX `fk_Students_Users1_idx` (`UserID` ASC) ,
+  CONSTRAINT `fk_Students_Classes`
+    FOREIGN KEY (`ClassID` )
+    REFERENCES `EJournal`.`Classes` (`ID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Students_Users1`
+    FOREIGN KEY (`UserID` )
+    REFERENCES `EJournal`.`Users` (`UserID` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB [50004-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3661)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3524)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5228)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:49:32 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Схема "ejournal" не найдена
+Schema "ejournal" not found; SQL statement:
+ALTER TABLE "EJOURNAL"."STUDENTS" add foreign key ("user_id") references "ejournal"."users"("id") [90079-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.getSchema(Parser.java:612)
+	at org.h2.command.Parser.getSchema(Parser.java:619)
+	at org.h2.command.Parser.parseReferences(Parser.java:5143)
+	at org.h2.command.Parser.parseAlterTableAddConstraintIf(Parser.java:5118)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:4835)
+	at org.h2.command.Parser.parseAlter(Parser.java:4322)
+	at org.h2.command.Parser.parsePrepared(Parser.java:305)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:49:57 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "user_id" не найден
+Column "user_id" not found; SQL statement:
+ALTER TABLE "EJOURNAL"."STUDENTS" add foreign key ("user_id") references "EJOURNAL"."USERS"("id") [42122-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:607)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:75)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:181)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:68)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:75)
+	at org.h2.command.Command.executeUpdate(Command.java:230)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:177)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:50:19 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "USER_ID" не найден
+Column "USER_ID" not found; SQL statement:
+ALTER TABLE "EJOURNAL"."STUDENTS" add foreign key ("USER_ID") references "EJOURNAL"."USERS"("ID") [42122-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:607)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:75)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:181)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:68)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:75)
+	at org.h2.command.Command.executeUpdate(Command.java:230)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:177)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 17:53:59 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "KEY"
+Unknown data type: "KEY"; SQL statement:
+CREATE TABLE IF NOT EXISTS "EJOURNAL"."CLASSES" (
+"ID" INT NOT NULL AUTO_INCREMENT,
+"NAME" VARCHAR(2) NOT NULL,
+"YEAR" INT NULL,
+PRINARY KEY ("ID"),
+UNIQUE INDEX "CLASSESID_UNIQUE" ("ID" ASC)) [50004-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3661)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3524)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5228)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 22:16:28 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "ASC" не найден
+Column "ASC" not found; SQL statement:
+CREATE TABLE "EJOURNAL"."MARKS" (
+"ID" INT NOT NULL AUTO_INCREMENT,
+"STUDENTID" INT NOT NULL,
+"VALUE" INT NOT NULL,
+"COMMENT" VARCHAR(255),
+"RANG" DOUBLE NOT NULL,
+PRIMARY KEY ("ID"),
+UNIQUE INDEX "MARKSID_UNIQUE" ("ID", ASC)) [42122-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.table.Table.getColumn(Table.java:607)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:75)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:139)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:68)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:168)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:75)
+	at org.h2.command.Command.executeUpdate(Command.java:230)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:177)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 22:24:34 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CREATE TABLE ""EJOURNAL"".""PRESENCE"" (
+""ID"" INT NOT NULL AUTO_INCREMENT,
+""STUDENTID""  INT NOT NULL,
+""VALUE"" INT NOT NULL,
+""DELAY"" INT NOT NULL,
+PRIMARY INDEX[*] (""ID""),
+UNIQUE INDEX ""PRESENCEID_UNIQUE"" (""ID"" ASC))"; ожидалось "KEY"
+Syntax error in SQL statement "CREATE TABLE ""EJOURNAL"".""PRESENCE"" (
+""ID"" INT NOT NULL AUTO_INCREMENT,
+""STUDENTID""  INT NOT NULL,
+""VALUE"" INT NOT NULL,
+""DELAY"" INT NOT NULL,
+PRIMARY INDEX[*] (""ID""),
+UNIQUE INDEX ""PRESENCEID_UNIQUE"" (""ID"" ASC))"; expected "KEY"; SQL statement:
+CREATE TABLE "EJOURNAL"."PRESENCE" (
+"ID" INT NOT NULL AUTO_INCREMENT,
+"STUDENTID"  INT NOT NULL,
+"VALUE" INT NOT NULL,
+"DELAY" INT NOT NULL,
+PRIMARY INDEX ("ID"),
+UNIQUE INDEX "PRESENCEID_UNIQUE" ("ID" ASC)) [42001-171]
+03-29 22:27:03 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".PRESENCE"" ADD FOREIGN KEY (""[*]STUDENTID"") REFERENCES ""EJOURNAL"".STUDENTS ('ID"")"; ожидалось "ADD, SET, RENAME, DROP, MODIFY, ALTER"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".PRESENCE"" ADD FOREIGN KEY (""[*]STUDENTID"") REFERENCES ""EJOURNAL"".STUDENTS ('ID"")"; expected "ADD, SET, RENAME, DROP, MODIFY, ALTER"; SQL statement:
+ALTER TABLE "EJOURNAL".PRESENCE" ADD FOREIGN KEY ("STUDENTID") REFERENCES "EJOURNAL".STUDENTS ('ID") [42001-171]
+03-29 22:27:26 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".PRESENCE"" ADD FOREIGN KEY (""STUDENTID"") REFERENCES ""EJOURNAL"".STUDENTS (""ID[*]"")"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".PRESENCE"" ADD FOREIGN KEY (""STUDENTID"") REFERENCES ""EJOURNAL"".STUDENTS (""ID[*]"")"; SQL statement:
+ALTER TABLE "EJOURNAL".PRESENCE" ADD FOREIGN KEY ("STUDENTID") REFERENCES "EJOURNAL".STUDENTS ("ID") [42000-171]
+03-29 22:27:48 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".PRESENCE"" ADD FOREIGN KEY (""STUDENTID"") REFERENCES ""EJOURNAL"".""STUDENTS"" (""ID[*]"")"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".PRESENCE"" ADD FOREIGN KEY (""STUDENTID"") REFERENCES ""EJOURNAL"".""STUDENTS"" (""ID[*]"")"; SQL statement:
+ALTER TABLE "EJOURNAL".PRESENCE" ADD FOREIGN KEY ("STUDENTID") REFERENCES "EJOURNAL"."STUDENTS" ("ID") [42000-171]
+03-29 22:38:15 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CREATE TABLE 'EJOURNAL'[*].'TIMETABLE' (
+'ID' INT NOT NULL AUTO_INCREMENT,
+'QUATERNUMBER' INT NOT NULL,
+'DAYNUMBER' INT NOT NULL,
+'LESSONTIMEID' INT NOT NULL,
+'DISCIPLINEID' INT NOT NULL,
+'CLASSID' INT NOT NULL,
+'GROUPID' INT NOT NULL,
+PRIMARY KEY ('ID'),
+UNIQUE INDEX 'TIMETABLEID_UNIQUE' ('ID' ASC))"; ожидалось "identifier"
+Syntax error in SQL statement "CREATE TABLE 'EJOURNAL'[*].'TIMETABLE' (
+'ID' INT NOT NULL AUTO_INCREMENT,
+'QUATERNUMBER' INT NOT NULL,
+'DAYNUMBER' INT NOT NULL,
+'LESSONTIMEID' INT NOT NULL,
+'DISCIPLINEID' INT NOT NULL,
+'CLASSID' INT NOT NULL,
+'GROUPID' INT NOT NULL,
+PRIMARY KEY ('ID'),
+UNIQUE INDEX 'TIMETABLEID_UNIQUE' ('ID' ASC))"; expected "identifier"; SQL statement:
+CREATE TABLE 'EJOURNAL'.'TIMETABLE' (
+'ID' INT NOT NULL AUTO_INCREMENT,
+'QUATERNUMBER' INT NOT NULL,
+'DAYNUMBER' INT NOT NULL,
+'LESSONTIMEID' INT NOT NULL,
+'DISCIPLINEID' INT NOT NULL,
+'CLASSID' INT NOT NULL,
+'GROUPID' INT NOT NULL,
+PRIMARY KEY ('ID'),
+UNIQUE INDEX 'TIMETABLEID_UNIQUE' ('ID' ASC)) [42001-171]
+03-29 22:39:13 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CREATE TABLE ""EJOURNAL"".""TIMETABLE"" (
+'ID'[*] INT NOT NULL AUTO_INCREMENT,
+'QUATERNUMBER' INT NOT NULL,
+'DAYNUMBER' INT NOT NULL,
+'LESSONTIMEID' INT NOT NULL,
+'DISCIPLINEID' INT NOT NULL,
+'CLASSID' INT NOT NULL,
+'GROUPID' INT NOT NULL,
+PRIMARY KEY ('ID'),
+UNIQUE INDEX 'TIMETABLEID_UNIQUE' ('ID' ASC))"; ожидалось "identifier"
+Syntax error in SQL statement "CREATE TABLE ""EJOURNAL"".""TIMETABLE"" (
+'ID'[*] INT NOT NULL AUTO_INCREMENT,
+'QUATERNUMBER' INT NOT NULL,
+'DAYNUMBER' INT NOT NULL,
+'LESSONTIMEID' INT NOT NULL,
+'DISCIPLINEID' INT NOT NULL,
+'CLASSID' INT NOT NULL,
+'GROUPID' INT NOT NULL,
+PRIMARY KEY ('ID'),
+UNIQUE INDEX 'TIMETABLEID_UNIQUE' ('ID' ASC))"; expected "identifier"; SQL statement:
+CREATE TABLE "EJOURNAL"."TIMETABLE" (
+'ID' INT NOT NULL AUTO_INCREMENT,
+'QUATERNUMBER' INT NOT NULL,
+'DAYNUMBER' INT NOT NULL,
+'LESSONTIMEID' INT NOT NULL,
+'DISCIPLINEID' INT NOT NULL,
+'CLASSID' INT NOT NULL,
+'GROUPID' INT NOT NULL,
+PRIMARY KEY ('ID'),
+UNIQUE INDEX 'TIMETABLEID_UNIQUE' ('ID' ASC)) [42001-171]
+03-29 22:51:41 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "KEY"
+Unknown data type: "KEY"; SQL statement:
+ALTER TABLE "EJOURNAL"."LESSONS" ADD FORREIGN KEY ("TIMETABLEID") REFERENCES "EJOURNAL"."TIMETABLE" ("ID") [50004-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3661)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3524)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5000)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:4839)
+	at org.h2.command.Parser.parseAlter(Parser.java:4322)
+	at org.h2.command.Parser.parsePrepared(Parser.java:305)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 23:40:18 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "KEY"
+Unknown data type: "KEY"; SQL statement:
+ALTER TABLE "EJOURNAL"."TIMETABLE" ADD FORREIGN KEY ("DISCIPLINEID") REFEERENCES "EJOURNAL"."DISCIPLINES"("ID") [50004-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3661)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3524)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5000)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:4839)
+	at org.h2.command.Parser.parseAlter(Parser.java:4322)
+	at org.h2.command.Parser.parsePrepared(Parser.java:305)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-29 23:40:25 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".""TIMETABLE"" ADD FOREIGN KEY (""DISCIPLINEID"") REFEERENCES[*] ""EJOURNAL"".""DISCIPLINES""(""ID"")"; ожидалось "INDEX, REFERENCES"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".""TIMETABLE"" ADD FOREIGN KEY (""DISCIPLINEID"") REFEERENCES[*] ""EJOURNAL"".""DISCIPLINES""(""ID"")"; expected "INDEX, REFERENCES"; SQL statement:
+ALTER TABLE "EJOURNAL"."TIMETABLE" ADD FOREIGN KEY ("DISCIPLINEID") REFEERENCES "EJOURNAL"."DISCIPLINES"("ID") [42001-171]
+03-29 23:40:39 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".""TIMETABLE"" ADD FOREIGN KEY (""DISCIPLINEID"") REFEERENCES[*] ""EJOURNAL"".""DISCIPLINES"" (""ID"")"; ожидалось "INDEX, REFERENCES"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".""TIMETABLE"" ADD FOREIGN KEY (""DISCIPLINEID"") REFEERENCES[*] ""EJOURNAL"".""DISCIPLINES"" (""ID"")"; expected "INDEX, REFERENCES"; SQL statement:
+ALTER TABLE "EJOURNAL"."TIMETABLE" ADD FOREIGN KEY ("DISCIPLINEID") REFEERENCES "EJOURNAL"."DISCIPLINES" ("ID") [42001-171]
+03-29 23:53:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE EJOURNAL.TEACHERSDISCIPLINESLINKS  ADD FORREIGN KEY (""TEACHERID"") REFERENCES EJOURNAL.TEACHERS ([*]'ID"")"
+Syntax error in SQL statement "ALTER TABLE EJOURNAL.TEACHERSDISCIPLINESLINKS  ADD FORREIGN KEY (""TEACHERID"") REFERENCES EJOURNAL.TEACHERS ([*]'ID"")"; SQL statement:
+ALTER TABLE EJOURNAL.TEACHERSDISCIPLINESLINKS  ADD FORREIGN KEY ("TEACHERID") REFERENCES EJOURNAL.TEACHERS ('ID") [42000-171]
+03-29 23:54:01 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".""TEACHERSDISCIPLINESLINKS""  ADD FORREIGN KEY (""TEACHERID"") REFERENCES ""EJOURNAL"".""TEACHERS"" ([*]'ID"")"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".""TEACHERSDISCIPLINESLINKS""  ADD FORREIGN KEY (""TEACHERID"") REFERENCES ""EJOURNAL"".""TEACHERS"" ([*]'ID"")"; SQL statement:
+ALTER TABLE "EJOURNAL"."TEACHERSDISCIPLINESLINKS"  ADD FORREIGN KEY ("TEACHERID") REFERENCES "EJOURNAL"."TEACHERS" ('ID") [42000-171]
+03-29 23:54:26 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE EJOURNAL.TEACHERSDISCIPLINESLINKS ADD FOREIGN KEY (""TEACHERID"") REFERENCES EJOURNAL.TEACHERS ([*]'ID"")"
+Syntax error in SQL statement "ALTER TABLE EJOURNAL.TEACHERSDISCIPLINESLINKS ADD FOREIGN KEY (""TEACHERID"") REFERENCES EJOURNAL.TEACHERS ([*]'ID"")"; SQL statement:
+ALTER TABLE EJOURNAL.TEACHERSDISCIPLINESLINKS ADD FOREIGN KEY ("TEACHERID") REFERENCES EJOURNAL.TEACHERS ('ID") [42000-171]
+03-29 23:55:11 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE ""EJOURNAL"".""TEACHERSDISCIPLINESLINKS"" ADD FOREIGN KEY (""TEACHERID"") REFERENCES ""EJOURNAL"".""TEACHERS"" ([*]'ID"")"
+Syntax error in SQL statement "ALTER TABLE ""EJOURNAL"".""TEACHERSDISCIPLINESLINKS"" ADD FOREIGN KEY (""TEACHERID"") REFERENCES ""EJOURNAL"".""TEACHERS"" ([*]'ID"")"; SQL statement:
+ALTER TABLE "EJOURNAL"."TEACHERSDISCIPLINESLINKS" ADD FOREIGN KEY ("TEACHERID") REFERENCES "EJOURNAL"."TEACHERS" ('ID") [42000-171]
+03-29 23:58:22 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT "; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"
+Syntax error in SQL statement "SELECT "; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"; SQL statement:
+SHOW "EJOURNAL"."USERS" [42001-171]
+03-29 23:58:37 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT "; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"
+Syntax error in SQL statement "SELECT "; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"; SQL statement:
+SHOW * "EJOURNAL"."USERS" [42001-171]
+03-29 23:59:08 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT "; ожидалось "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"
+Syntax error in SQL statement "SELECT "; expected "TOP, LIMIT, DISTINCT, ALL, *, NOT, EXISTS"; SQL statement:
+SHOW * FROM "EJOURNAL"."USERS" [42001-171]
+03-30 00:00:23 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SHOW TABLES FROM EJOURNAL."
+Syntax error in SQL statement "SHOW TABLES FROM EJOURNAL."; SQL statement:
+SHOW TABLES FROM EJOURNAL. [42000-171]
+03-30 00:05:52 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: "RANG"
+Unknown data type: "RANG"; SQL statement:
+CREATE TABLE EJOURNAL.DISCIPLINERANGS (
+"CLASSID" INT NOT NULL,
+"DISCIPLINEID" RANG DOUBLE)
+
+ALTER TABLE EJOURNAL.TEACHERSCLASSESLINKS ADD FOREIGN KEY ("TEACHERID") REFERENCES EJOURNAL.TEACHERS ("ID") [50004-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3661)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3524)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5228)
+	at org.h2.command.Parser.parseCreate(Parser.java:3813)
+	at org.h2.command.Parser.parsePrepared(Parser.java:323)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:417)
+	at org.h2.engine.Session.prepareCommand(Session.java:366)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1312)
+	at org.h2.server.web.WebApp.query(WebApp.java:1002)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:965)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+03-30 00:06:31 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "TEACHERSCLASSESLINKS" уже существует
+Table "TEACHERSCLASSESLINKS" already exists; SQL statement:
+CREATE TABLE EJOURNAL.TEACHERSCLASSESLINKS (
+"TEACHERID" INT NOT NULL,
+"CLASSID" INT NOT NULL,
+"GROUPID" INT NOT NULL) [42101-171]
+03-30 00:06:31 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CREATE TABLE EJOURNAL.DISCIPLINERANGS (
+""CLASSID"" INT NOT NULL,
+""DISCIPLINEID"" INT NOT NULL,
+""RANG"" DOUBLE NOT NULL)
+
+ALTER[*] TABLE EJOURNAL.TEACHERSCLASSESLINKS ADD FOREIGN KEY (""TEACHERID"") REFERENCES EJOURNAL.TEACHERS (""ID"")"
+Syntax error in SQL statement "CREATE TABLE EJOURNAL.DISCIPLINERANGS (
+""CLASSID"" INT NOT NULL,
+""DISCIPLINEID"" INT NOT NULL,
+""RANG"" DOUBLE NOT NULL)
+
+ALTER[*] TABLE EJOURNAL.TEACHERSCLASSESLINKS ADD FOREIGN KEY (""TEACHERID"") REFERENCES EJOURNAL.TEACHERS (""ID"")"; SQL statement:
+CREATE TABLE EJOURNAL.DISCIPLINERANGS (
+"CLASSID" INT NOT NULL,
+"DISCIPLINEID" INT NOT NULL,
+"RANG" DOUBLE NOT NULL)
+
+ALTER TABLE EJOURNAL.TEACHERSCLASSESLINKS ADD FOREIGN KEY ("TEACHERID") REFERENCES EJOURNAL.TEACHERS ("ID") [42000-171]
+03-30 00:07:44 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CREATE TABLE EJOURNAL.TEACHERSCLASSESLINKS IF[*] NOT EXISTS (
+""TEACHERID"" INT NOT NULL,
+""CLASSID"" INT NOT NULL,
+""GROUPID"" INT NOT NULL)"
+Syntax error in SQL statement "CREATE TABLE EJOURNAL.TEACHERSCLASSESLINKS IF[*] NOT EXISTS (
+""TEACHERID"" INT NOT NULL,
+""CLASSID"" INT NOT NULL,
+""GROUPID"" INT NOT NULL)"; SQL statement:
+CREATE TABLE EJOURNAL.TEACHERSCLASSESLINKS IF NOT EXISTS (
+"TEACHERID" INT NOT NULL,
+"CLASSID" INT NOT NULL,
+"GROUPID" INT NOT NULL) [42000-171]
+03-30 00:08:43 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "DISCIPLINERANGS" уже существует
+Table "DISCIPLINERANGS" already exists; SQL statement:
+CREATE TABLE EJOURNAL.DISCIPLINERANGS (
+"CLASSID" INT NOT NULL,
+"DISCIPLINEID" INT NOT NULL,
+"RANG" DOUBLE NOT NULL) [42101-171]
