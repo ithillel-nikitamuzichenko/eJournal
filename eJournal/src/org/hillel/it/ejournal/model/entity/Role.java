@@ -1,6 +1,7 @@
 package org.hillel.it.ejournal.model.entity;
 
 public enum Role {
+
 	STUDENT {
 		public int intValue() {
 			return 0;
@@ -18,4 +19,17 @@ public enum Role {
 	};
 
 	public abstract int intValue();
+
+	public static Role getRole(int value) {
+		switch (value) {
+		case 0:
+			return STUDENT;
+		case 1:
+			return TEACHER;
+		case 2:
+			return ADMIN;
+		default:
+			return null;
+		}
+	}
 }
