@@ -1,22 +1,26 @@
 package org.hillel.it.ejournal.model.entity;
 
-import java.util.List;
+public class SchoolClass extends Entity {
+	private String name;
+	private int year;
 
-public class SchoolClass {
-	public String name;
-	public int year;
-	public List<Student> studentList;
-
-	public SchoolClass() {
-
+	@Override
+	public String toString() {
+		return String.format("%d%s", year, name.toUpperCase());
 	}
 
-	public List<String> getStudentList() {
-		return null;
+	public int getYear() {
+		return year;
 	}
 
-	public Student getStudentByName(String name) {
-		return null;
+	public String getName() {
+		return name;
+	}
+
+	public SchoolClass(String name, int year) {
+		super(null, EntityType.SCHOOL_CLASS);
+		this.name = name;
+		this.year = year;
 	}
 
 }
