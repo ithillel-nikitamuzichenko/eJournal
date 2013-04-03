@@ -6,7 +6,7 @@ import java.util.Scanner;
 import org.hillel.it.ejournal.model.entity.User;
 import org.hillel.it.ejournal.service.persistance.dao.DBDAO;
 
-public class Session implements Service{
+public class MainService implements Service{
 	private static final String HELP_COMMAND = "help";
 	private static final String EXIT_COMMAND = "exit";
 	private static final String ABOUT_COMMAND = "about";
@@ -18,7 +18,7 @@ public class Session implements Service{
 
 	private UserService service = new UserService(null, scanner);
 
-	public Session() {
+	public MainService() {
 		System.out.println("Java command line eJournal. Type 'help' for help.");
 		commands.put(LOGIN_COMMAND, "begin autorization process.");
 		commands.put(HELP_COMMAND, "show this help.");
