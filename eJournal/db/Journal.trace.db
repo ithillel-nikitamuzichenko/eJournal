@@ -762,3 +762,21 @@ CREATE TABLE EJOURNAL.DISCIPLINERANGS (
 "CLASSID" INT NOT NULL,
 "DISCIPLINEID" INT NOT NULL,
 "RANG" DOUBLE NOT NULL) [42101-171]
+04-03 12:37:08 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "Sex" не найден
+Column "Sex" not found [42122-171]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:2892)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:2978)
+	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:322)
+	at org.hillel.it.ejournal.service.persistance.dao.DBDAO.getUser(DBDAO.java:73)
+	at org.hillel.it.ejournal.service.io.Session.makeLogin(Session.java:83)
+	at org.hillel.it.ejournal.service.io.Session.interpretCommand(Session.java:57)
+	at org.hillel.it.ejournal.service.io.Session.<init>(Session.java:28)
+	at org.hillel.it.ejournal.main.EJournal.main(EJournal.java:12)
+04-03 12:38:09 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "USERS" не найдена
+Table "USERS" not found; SQL statement:
+drop table users [42102-170]
