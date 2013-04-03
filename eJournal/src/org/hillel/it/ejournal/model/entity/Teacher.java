@@ -1,7 +1,6 @@
 package org.hillel.it.ejournal.model.entity;
 
 import java.util.Date;
-import java.util.List;
 
 public class Teacher extends User {
 
