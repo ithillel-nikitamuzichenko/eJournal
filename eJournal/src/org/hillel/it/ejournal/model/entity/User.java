@@ -53,10 +53,10 @@ public class User extends Entity {
 
 	@Override
 	public String toString(){
-		return ("/nName: "+name+
-				"/nSurname: "+surname+
-				"/nDate of birth: "+birthDate+
-				"/nSex: "+sex+
-				"/nRole: "+role);
+		return ("\nName: "+name+
+				"\nSurname: "+surname+
+				"\nDate of birth: "+birthDate+
+				"\nSex: "+sex+
+				"\nRole: "+role);
 	}
 }
