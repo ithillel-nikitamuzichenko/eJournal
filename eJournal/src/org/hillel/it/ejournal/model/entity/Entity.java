@@ -1,30 +1,11 @@
 package org.hillel.it.ejournal.model.entity;
 
-public class Entity {
-	private Integer id;
+public interface Entity {
+	public EntityType getEntityType();
 
-	private EntityType entityType;
+	public Integer getId();
 
-	public Entity(Integer id, EntityType entityType) {
-		super();
-		this.id = id;
-		this.entityType = entityType;
-	}
+	public void setId(Integer id);
 
-	public EntityLog getEntityLog() {
-		return null;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		if (this.id == null)
-			this.id = id;
-	}
-
-	public EntityType getEntityType() {
-		return entityType;
-	};
+	public EntityLog getEntityLog();
 }
