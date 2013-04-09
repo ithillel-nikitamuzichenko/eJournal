@@ -30,9 +30,14 @@ public class ShowClasses implements Command {
 	}
 
 	@Override
+	public boolean canExecute(User user) {
+		return (user != null)
+				&& (user.getRole().intValue() >= Role.STUDENT.intValue());
+	}
+
+	@Override
 	public void execute(User user) {
-		if ((user != null)
-				&& (user.getRole().intValue() >= Role.STUDENT.intValue())) {
+		if (canExecute(user)) {
 			Map<Integer, SchoolClass> schoolClasses = DBDAO.getInstance()
 					.getSchoolClasses();
 			for (Map.Entry<Integer, SchoolClass> entry : schoolClasses

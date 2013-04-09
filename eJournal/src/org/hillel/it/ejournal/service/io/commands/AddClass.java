@@ -30,9 +30,14 @@ public class AddClass implements Command {
 	}
 
 	@Override
+	public boolean canExecute(User user) {
+		return (user != null)
+				&& (user.getRole().intValue() >= Role.ADMIN.intValue());
+	}
+
+	@Override
 	public void execute(User user) {
-		if ((user != null)
-				&& (user.getRole().intValue() >= Role.ADMIN.intValue())) {
+		if (canExecute(user)) {
 			System.out.print("Name: ");
 			String name = scanner.nextLine();
 			System.out.print("Year: ");

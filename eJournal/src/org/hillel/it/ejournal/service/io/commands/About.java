@@ -24,6 +24,11 @@ public class About implements Command {
 	public String getDescription() {
 		return "show version and information about authors.";
 	}
+	
+	@Override
+	public boolean canExecute(User user) {
+		return true;
+	}
 
 	@Override
 	public void execute(User user) {

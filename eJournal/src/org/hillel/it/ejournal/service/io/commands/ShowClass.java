@@ -31,9 +31,14 @@ public class ShowClass implements Command {
 	}
 
 	@Override
+	public boolean canExecute(User user) {
+		return (user != null)
+				&& (user.getRole().intValue() >= Role.TEACHER.intValue());
+	}
+
+	@Override
 	public void execute(User user) {
-		if ((user != null)
-				&& (user.getRole().intValue() >= Role.TEACHER.intValue())) {
+		if (canExecute(user)) {
 			Integer classId;
 			SchoolClass schoolClass;
 			do {
