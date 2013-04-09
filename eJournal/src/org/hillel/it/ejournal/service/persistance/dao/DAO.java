@@ -10,10 +10,10 @@ public interface DAO {
 	Student getStudent(int id);
 	List<Student> getClassList(int schoolClassId);
 
-	int addTeacher(Teacher teacher);
+	int addTeacher(Teacher teacher, String comment, User creator);
 	Teacher getTeacher(int id);
 	
-	int addSubject(Subject subject);
+	int addSubject(Subject subject, String comment, User creator);
 	List<Subject> getSubjectList();
 
 	int addSchoolClass(SchoolClass schoolClass, String comment, User creator);

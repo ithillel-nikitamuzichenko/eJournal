@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.hillel.it.ejournal.main.AppSettings;
 import org.hillel.it.ejournal.model.entity.*;
 
@@ -49,14 +50,13 @@ public class DBDAO implements DAO {
 					.execute(String
 							.format("INSERT INTO EJournal.EntitiesLog VALUES "
 									+ "(NULL, %d, %d, CURRENT_TIMESTAMP, %d, '%s', %d)",
-									entity.getId(), entity.getEntityType(),
+									entity.getId(), entity.getEntityType().intValue(),
 									action.intValue(), comment, creator.getId()));
 			rs = statement.getGeneratedKeys();
 			if (rs.next()) {
 				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -72,15 +72,15 @@ public class DBDAO implements DAO {
 									user.getSurname(), date_format.format(user
 											.getBirthDate().getTime()), user
 											.getSex().intValue(), user
-											.getLogin(), user.getPassword()));
+											.getLogin(), DigestUtils.md5Hex(user.getPassword())));
 			rs = statement.getGeneratedKeys();
 			if (rs.next()) {
 				int userId = rs.getInt(1);
+				user.setId(userId);
 				commitEntity(user, Action.CREATE, comment, creator);
 				return userId;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -91,7 +91,7 @@ public class DBDAO implements DAO {
 		try {
 			rs = statement.executeQuery(String.format(
 					"SELECT * FROM EJournal.Users WHERE (Login = '%s') "
-							+ "AND (Password = '%s')", login, password));
+							+ "AND (Password = '%s')", login, DigestUtils.md5Hex(password)));
 			if (rs.next()) {
 				user = new User(rs.getString("Name"), rs.getString("Surname"),
 						rs.getDate("Birthdate"), Sex.getSex(rs.getInt("Sex")),
@@ -100,7 +100,6 @@ public class DBDAO implements DAO {
 				user.setId(rs.getInt("ID"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return user;
@@ -108,7 +107,6 @@ public class DBDAO implements DAO {
 
 	@Override
 	public int addStudent(Student student, String comment, User creator) {
-		// TODO Auto-generated method stub
 		try {
 			int userId = addUser(student, comment, creator);
 			statement.execute(String.format(
@@ -120,7 +118,6 @@ public class DBDAO implements DAO {
 				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -128,7 +125,6 @@ public class DBDAO implements DAO {
 
 	@Override
 	public Student getStudent(int id) {
-		// TODO Auto-generated method stub
 		Student stud = null;
 		try {
 			rs = statement
@@ -140,11 +136,10 @@ public class DBDAO implements DAO {
 				stud = new Student(rs.getString("Name"),
 						rs.getString("Surname"), rs.getDate("Birthdate"),
 						Sex.getSex(rs.getInt("Sex")), rs.getString("Login"),
-						rs.getString("Password"));
+						rs.getString("Password"), rs.getInt("GroupId"));
 				stud.setId(id);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return stud;
@@ -163,38 +158,74 @@ public class DBDAO implements DAO {
 				Student student = new Student(rs.getString("Name"),
 						rs.getString("Surname"), rs.getDate("Birthdate"),
 						Sex.getSex(rs.getInt("Sex")), rs.getString("Login"),
-						rs.getString("Password"));
+						rs.getString("Password"), rs.getInt("GroupId"));
 				student.setId(rs.getInt("Id"));
 				studentList.add(student);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return studentList;
 	}
 
 	@Override
-	public int addSubject(Subject subject) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addSubject(Subject subject, String comment, User creator) {
+		try {
+			statement
+					.execute(String
+							.format("INSERT INTO EJournal.Disciplines VALUES(null, '%s', '%s')",
+									subject.getName(), subject.getShortName()));
+			rs = statement.getGeneratedKeys();
+			if (rs.next()) {
+				int subjectId = rs.getInt(1);
+				subject.setId(subjectId);
+				commitEntity(subject, Action.CREATE, comment, creator);
+				return subjectId;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	@Override
 	public List<Subject> getSubjectList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Subject> subjectList = new ArrayList<Subject>();
+		try {
+			rs = statement.executeQuery("SELECT * FROM EJournal.Disciplines");
+			while (rs.next()) {
+				Subject subject = new Subject(rs.getString("Name"),
+						rs.getString("Short_name"));
+				subject.setId(rs.getInt("Id"));
+				subjectList.add(subject);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return subjectList;
 	}
 
 	@Override
-	public int addTeacher(Teacher teacher) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addTeacher(Teacher teacher, String comment, User creator) {
+		try {
+			int userId = addUser(teacher, comment, creator);
+			statement
+					.execute(String
+							.format("INSERT INTO EJournal.Teachers VALUES (null, %d, DATE '%s', %d)",
+									userId, teacher.getStartWork().getTime(),
+									teacher.getExperience()));
+			rs = statement.getGeneratedKeys();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	@Override
 	public Teacher getTeacher(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -208,11 +239,11 @@ public class DBDAO implements DAO {
 			rs = statement.getGeneratedKeys();
 			if (rs.next()) {
 				int classId = rs.getInt(1);
+				schoolClass.setId(classId);
 				commitEntity(schoolClass, Action.CREATE, comment, creator);
 				return classId;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -230,7 +261,6 @@ public class DBDAO implements DAO {
 				schoolClass.setId(id);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return schoolClass;
@@ -249,7 +279,6 @@ public class DBDAO implements DAO {
 				schoolClass.setId(rs.getInt("ID"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return schoolClass;
@@ -267,7 +296,6 @@ public class DBDAO implements DAO {
 				schoolClasses.put(schoolClass.getId(), schoolClass);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return schoolClasses;
@@ -275,37 +303,31 @@ public class DBDAO implements DAO {
 
 	@Override
 	public int addMark(Mark mark) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Mark getMark(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int addPresence(Presence presence) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Presence getPresence(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int addLesson(Lesson lesson) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Lesson getLesson(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
