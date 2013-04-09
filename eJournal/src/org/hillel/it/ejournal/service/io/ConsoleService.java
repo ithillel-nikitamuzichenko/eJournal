@@ -23,7 +23,7 @@ public class ConsoleService {
 
 	public ConsoleService() {
 		System.out.println("Java command line eJournal. Type 'help' for help.");
-		
+
 		commands.put(About.ABOUT_COMMAND, About.getInstance(scanner));
 		commands.put(AddClass.ADDCLASS_COMMAND, AddClass.getInstance(scanner));
 		commands.put(AddStudent.ADDSTUDENT_COMMAND,
@@ -32,7 +32,10 @@ public class ConsoleService {
 				ShowClasses.getInstance(scanner));
 		commands.put(ShowClass.SHOWCLASS_COMMAND,
 				ShowClass.getInstance(scanner));
-		
+		commands.put(AddSubject.ADDSUBJECT_COMMAND,
+				AddSubject.getInstance(scanner));
+		commands.put(AddTeacher.ADDTEACHER_COMMAND,
+				AddTeacher.getInstance(scanner));
 		do {
 			interpretCommand(getCommand());
 		} while (exitFlag == 0);
@@ -72,13 +75,18 @@ public class ConsoleService {
 	}
 
 	private void showHelp() {
-		System.out.println(String.format("%s - %s", HELP_COMMAND, "show this help."));
-		System.out.println(String.format("%s - %s", LOGIN_COMMAND, "begin autorization process."));
-		System.out.println(String.format("%s - %s", EXIT_COMMAND, "end programm execution."));
+		System.out.println(String.format("%s - %s", HELP_COMMAND,
+				"show this help."));
+		System.out.println(String.format("%s - %s", LOGIN_COMMAND,
+				"begin autorization process."));
+		System.out.println(String.format("%s - %s", EXIT_COMMAND,
+				"end programm execution."));
 		for (Map.Entry<String, Command> entry : commands.entrySet()) {
-			String key = entry.getKey().toUpperCase();
-			String value = entry.getValue().getDescription();
-			System.out.println(String.format("%s - %s", key, value));
+			if (entry.getValue().canExecute(user)) {
+				String key = entry.getKey().toUpperCase();
+				String value = entry.getValue().getDescription();
+				System.out.println(String.format("%s - %s", key, value));
+			}
 		}
 
 	}
