@@ -2,9 +2,12 @@ package org.hillel.it.ejournal.service.io.commands;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import org.hillel.it.ejournal.model.entity.SchoolClass;
 import org.hillel.it.ejournal.model.entity.Sex;
 import org.hillel.it.ejournal.model.entity.Student;
 import org.hillel.it.ejournal.model.entity.User;
@@ -41,33 +44,41 @@ public class AddStudent implements Command {
 			String name = scanner.nextLine();
 			System.out.print("Surname: ");
 			String surname = scanner.nextLine();
-			System.out.print("Birthday(dd.mm.yyyy): ");
 			SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
 			Date birthDate = null;
-			try {
-				birthDate = sdf.parse(scanner.nextLine());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Calendar calendar = GregorianCalendar.getInstance();
+			calendar.add(Calendar.YEAR, -90);
+			do
+				try {
+					System.out.print("Birthday(dd.mm.yyyy): ");
+					birthDate = sdf.parse(scanner.nextLine());
+				} catch (ParseException e) {
+					System.out.println("Ошибка ввода даты");
+				}
+			while ((birthDate == null)
+					|| (birthDate.before(calendar.getTime()))
+					|| (birthDate.after(Calendar.getInstance().getTime())));
 			System.out.print("Sex(0-Female, 1-Male): ");
 			Sex sex = Sex.getSex(scanner.nextInt());
 			System.out.print("Login: ");
 			String login = scanner.next();
 			System.out.print("Password: ");
 			String password = scanner.next();
-			System.out.print("Class id: ");
-			Integer classId = scanner.nextInt();
-
+			Integer classId;
+			SchoolClass schoolClass;
+			do {
+				System.out.print("Class id: ");
+				classId = scanner.nextInt();
+				schoolClass = DBDAO.getInstance().getSchoolClass(classId);
+			} while (schoolClass == null);
 			Student student = new Student(name, surname, birthDate, sex, login,
 					password);
-			student.setSchoolClass(DBDAO.getInstance().getSchoolClass(classId));
-			int studentId = DBDAO.getInstance().addStudent(student);
-			System.out.println(String.format("Class id=%d was added.",
+			student.setSchoolClass(schoolClass);
+			int studentId = DBDAO.getInstance().addStudent(student, "", user);
+			System.out.println(String.format("Student id=%d was added.",
 					studentId));
 		} else {
 			System.out.println("Not enough permission. Access denided.");
 		}
 	}
-
 }

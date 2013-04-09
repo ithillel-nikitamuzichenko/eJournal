@@ -39,7 +39,8 @@ public class AddClass implements Command {
 			Integer year = Integer.valueOf(scanner.nextLine());
 			if (!(year == null) && !(name.length() > 2)) {
 				SchoolClass schoolClass = new SchoolClass(name, year);
-				int classId = DBDAO.getInstance().addSchoolClass(schoolClass);
+				int classId = DBDAO.getInstance().addSchoolClass(schoolClass,
+						"", user);
 				System.out.println(String.format("Class id=%d was added.",
 						classId));
 			} else {

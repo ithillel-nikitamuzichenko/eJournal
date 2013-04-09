@@ -32,7 +32,7 @@ public class ShowClasses implements Command {
 	@Override
 	public void execute(User user) {
 		if ((user != null)
-				&& (user.getRole().intValue() >= Role.TEACHER.intValue())) {
+				&& (user.getRole().intValue() >= Role.STUDENT.intValue())) {
 			Map<Integer, SchoolClass> schoolClasses = DBDAO.getInstance()
 					.getSchoolClasses();
 			for (Map.Entry<Integer, SchoolClass> entry : schoolClasses
