@@ -2,7 +2,7 @@ package org.hillel.it.ejournal.model.entity;
 
 import java.util.Date;
 
-public class User extends Entity {
+public class User implements Entity {
 	protected String name;
 	protected String surname;
 	protected Date birthDate;
@@ -10,10 +10,10 @@ public class User extends Entity {
 	protected Role role;
 	protected String login;
 	private String password;
+	protected Integer id = null;
 
 	public User(String name, String surname, Date birthDate, Sex sex,
 			Role role, String login, String password) {
-		super(null, EntityType.USER);
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
@@ -21,6 +21,28 @@ public class User extends Entity {
 		this.role = role;
 		this.login = login;
 		this.password = password;
+	}
+
+	@Override
+	public EntityType getEntityType() {
+		return EntityType.USER;
+	}
+
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Integer id) {
+		if (this.id == null) {
+			this.id = id;
+		}
+	}
+
+	@Override
+	public EntityLog getEntityLog() {
+		return null;
 	}
 
 	public String getName() {
