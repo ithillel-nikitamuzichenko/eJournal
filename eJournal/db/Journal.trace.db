@@ -780,3 +780,167 @@ Column "Sex" not found [42122-171]
 org.h2.jdbc.JdbcSQLException: Таблица "USERS" не найдена
 Table "USERS" not found; SQL statement:
 drop table users [42102-170]
+04-08 19:53:07 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "ID_UNIQUE" уже существует
+Constraint "ID_UNIQUE" already exists; SQL statement:
+CREATE TABLE IF NOT EXISTS EJournal.EntitiesLog (
+  ID INT NOT NULL AUTO_INCREMENT ,
+  EntityID INT NOT NULL ,
+  EntityType INT NOT NULL ,
+  Date DATETIME NULL ,
+  Actio INT NOT NULL,
+  Comment VARCHAR(255) NULL ,
+  UserID INT NOT NULL,
+  PRIMARY KEY (ID) ,
+  UNIQUE INDEX ID_UNIQUE (ID ASC)) [90045-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:89)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:68)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:168)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:75)
+	at org.h2.command.Command.executeUpdate(Command.java:230)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:177)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+04-08 20:04:15 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "GETDATE[*]() "; ожидалось "GRANT, {"
+Syntax error in SQL statement "GETDATE[*]() "; expected "GRANT, {"; SQL statement:
+getdate() [42001-170]
+04-08 20:05:36 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CURRENT_DATE"; ожидалось "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"
+Syntax error in SQL statement "CURRENT_DATE"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"; SQL statement:
+CURRENT_DATE [42001-170]
+04-08 20:05:43 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CURRENT_DATE[*]()"; ожидалось "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"
+Syntax error in SQL statement "CURRENT_DATE[*]()"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"; SQL statement:
+CURRENT_DATE() [42001-170]
+04-08 20:06:17 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "CURTIME[*]()"; ожидалось "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"
+Syntax error in SQL statement "CURTIME[*]()"; expected "COMMIT, CREATE, CALL, CHECKPOINT, COMMENT, {"; SQL statement:
+CURTIME() [42001-170]
+04-08 20:06:41 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "NOW[*] "
+Syntax error in SQL statement "NOW[*] "; SQL statement:
+now [42000-170]
+04-08 20:06:44 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "NOW[*] "
+Syntax error in SQL statement "NOW[*] "; SQL statement:
+now [42000-170]
+04-08 20:06:46 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "NOW[*]() "
+Syntax error in SQL statement "NOW[*]() "; SQL statement:
+now() [42000-170]
+04-08 20:36:54 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "INSERT INTO EJOURNAL.ENTITIESLOG VALUES (NULL, 37, 0, SELECT CURRENT_TIMESTAMP, 0, ,[*] 1) "; ожидалось "*, NOT, EXISTS, SELECT, FROM"
+Syntax error in SQL statement "INSERT INTO EJOURNAL.ENTITIESLOG VALUES (NULL, 37, 0, SELECT CURRENT_TIMESTAMP, 0, ,[*] 1) "; expected "*, NOT, EXISTS, SELECT, FROM"; SQL statement:
+INSERT INTO EJournal.EntitiesLog VALUES (NULL, 37, 0, SELECT CURRENT_TIMESTAMP, 0, , 1) [42001-171]
+04-08 20:39:25 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Неверное количество столбцов
+Column count does not match; SQL statement:
+INSERT INTO EJOURNAL.ENTITIESLOG VALUES (NULL, 37, 0, SELECT CURRENT_TIMESTAMP, 0, '' ,1) [21002-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.message.DbException.get(DbException.java:135)
+	at org.h2.command.dml.Insert.prepare(Insert.java:226)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:414)
+	at org.h2.engine.Session.prepareCommand(Session.java:363)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+04-09 12:11:50 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "EJOURNAL[*].STUDENTS"; ожидалось "EXPLAIN, EXECUTE, {"
+Syntax error in SQL statement "EJOURNAL[*].STUDENTS"; expected "EXPLAIN, EXECUTE, {"; SQL statement:
+EJOURNAL.STUDENTS [42001-170]
+04-09 12:12:21 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "DELETE *[*] FROM EJOURNAL.STUDENTS "; ожидалось "identifier"
+Syntax error in SQL statement "DELETE *[*] FROM EJOURNAL.STUDENTS "; expected "identifier"; SQL statement:
+delete * FROM EJOURNAL.STUDENTS [42001-170]
+04-09 14:02:09 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "EJOURNAL.STUDENTS" не найден
+Column "EJOURNAL.STUDENTS" not found; SQL statement:
+SELECT * FROM EJournal.Users JOIN EJournal.Students WHERE EJournal.Students.USERID=EJournal.Users.ID and Ejournal.Students = 4 [42122-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:141)
+	at org.h2.expression.Comparison.optimize(Comparison.java:159)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:127)
+	at org.h2.command.dml.Select.prepare(Select.java:802)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:414)
+	at org.h2.engine.Session.prepareCommand(Session.java:363)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+04-09 14:02:20 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "EJOURNAL.STUDENTS" не найден
+Column "EJOURNAL.STUDENTS" not found; SQL statement:
+SELECT * FROM EJournal.Users JOIN EJournal.Students WHERE (EJournal.Students.USERID=EJournal.Users.ID) and (Ejournal.Students = 4) [42122-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:141)
+	at org.h2.expression.Comparison.optimize(Comparison.java:159)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:127)
+	at org.h2.command.dml.Select.prepare(Select.java:802)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:414)
+	at org.h2.engine.Session.prepareCommand(Session.java:363)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+04-09 14:02:27 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "EJOURNAL.CLASSID" не найден
+Column "EJOURNAL.CLASSID" not found; SQL statement:
+SELECT * FROM EJournal.Users JOIN EJournal.Students WHERE (EJournal.Students.USERID=EJournal.Users.ID) and (Ejournal.ClassId= 4) [42122-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:141)
+	at org.h2.expression.Comparison.optimize(Comparison.java:159)
+	at org.h2.expression.ConditionAndOr.optimize(ConditionAndOr.java:127)
+	at org.h2.command.dml.Select.prepare(Select.java:802)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:414)
+	at org.h2.engine.Session.prepareCommand(Session.java:363)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
