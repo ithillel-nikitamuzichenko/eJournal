@@ -5,14 +5,14 @@ import java.util.Date;
 public class Student extends User {
 		private SchoolClass schoolClass;
 
-		private int groupId;
+		private Integer groupId;
 
-		public Student(String name, String surname, Date birthDate, Sex sex, String login, String password) {
+		public Student(String name, String surname, Date birthDate, Sex sex, String login, String password, Integer groupId) {
 			super(name, surname, birthDate, sex, Role.STUDENT, login, password);
-			// TODO Auto-generated constructor stub
+			this.groupId = groupId;  
 		}
 
-		public int getGroupId() {
+		public Integer getGroupId() {
 			return groupId;
 		}
 		
