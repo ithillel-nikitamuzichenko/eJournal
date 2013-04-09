@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import org.hillel.it.ejournal.model.entity.User;
 import org.hillel.it.ejournal.service.io.commands.*;
+import org.hillel.it.ejournal.service.persistance.dao.DAO;
 import org.hillel.it.ejournal.service.persistance.dao.DBDAO;
 
 public class ConsoleService {
@@ -20,6 +21,8 @@ public class ConsoleService {
 	private Scanner scanner = new Scanner(System.in);
 
 	private User user = null;
+	
+	private DAO dao = DBDAO.getInstance();
 
 	public ConsoleService() {
 		System.out.println("Java command line eJournal. Type 'help' for help.");
@@ -65,11 +68,11 @@ public class ConsoleService {
 			makeLogin();
 			break;
 		default:
-			Command ñ = commands.get(command);
-			if (ñ == null) {
+			Command c = commands.get(command);
+			if (c == null) {
 				System.out.println("Invalid command");
 			} else {
-				ñ.execute(user);
+				c.execute(user);
 			}
 		}
 	}
@@ -96,7 +99,7 @@ public class ConsoleService {
 		String login = scanner.nextLine();
 		System.out.print("Password: ");
 		String password = scanner.nextLine();
-		user = DBDAO.getInstance().getUser(login, password);
+		user = dao.getUser(login, password);
 		if (user == null)
 			System.out.println("Access denided.");
 	}
