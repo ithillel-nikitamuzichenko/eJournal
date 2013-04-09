@@ -30,6 +30,8 @@ public class ConsoleService {
 				AddStudent.getInstance(scanner));
 		commands.put(ShowClasses.SHOWCLASSES_COMMAND,
 				ShowClasses.getInstance(scanner));
+		commands.put(ShowClass.SHOWCLASS_COMMAND,
+				ShowClass.getInstance(scanner));
 		
 		do {
 			interpretCommand(getCommand());
