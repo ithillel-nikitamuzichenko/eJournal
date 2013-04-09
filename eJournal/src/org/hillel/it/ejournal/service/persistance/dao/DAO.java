@@ -1,27 +1,32 @@
 package org.hillel.it.ejournal.service.persistance.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.hillel.it.ejournal.model.entity.*;
 
 public interface DAO {
-	public int addStudent(Student student);
-	public Student getStudent(int id);
+	int addStudent(Student student, String comment, User creator);
+	Student getStudent(int id);
+	List<Student> getClassList(int schoolClassId);
 
-	public int addTeacher(Teacher teacher);
-	public Teacher getTeacher(int id);
+	int addTeacher(Teacher teacher);
+	Teacher getTeacher(int id);
+	
+	int addSubject(Subject subject);
+	List<Subject> getSubjectList();
 
-	public int addSchoolClass(SchoolClass schoolClass);
-	public SchoolClass getSchoolClass(int id);
-	public SchoolClass getSchoolClass(int year, String name);
-	public Map<Integer, SchoolClass> getSchoolClasses();
+	int addSchoolClass(SchoolClass schoolClass, String comment, User creator);
+	SchoolClass getSchoolClass(int id);
+	SchoolClass getSchoolClass(int year, String name);
+	Map<Integer, SchoolClass> getSchoolClasses();
 
-	public int addMark(Mark mark);
-	public Mark getMark(int id);
+	int addMark(Mark mark);
+	Mark getMark(int id);
 
-	public int addPresence(Presence presence);
-	public Presence getPresence(int id);
+	int addPresence(Presence presence);
+	Presence getPresence(int id);
 
-	public int addLesson(Lesson lesson);
-	public Lesson getLesson(int id);
+	int addLesson(Lesson lesson);
+	Lesson getLesson(int id);
 }

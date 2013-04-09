@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.hillel.it.ejournal.main.AppSettings;
@@ -40,7 +42,27 @@ public class DBDAO implements DAO {
 		return instance;
 	}
 
-	public int addUser(User user) {
+	private int commitEntity(Entity entity, Action action, String comment,
+			User creator) {
+		try {
+			statement
+					.execute(String
+							.format("INSERT INTO EJournal.EntitiesLog VALUES "
+									+ "(NULL, %d, %d, CURRENT_TIMESTAMP, %d, '%s', %d)",
+									entity.getId(), entity.getEntityType(),
+									action.intValue(), comment, creator.getId()));
+			rs = statement.getGeneratedKeys();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public int addUser(User user, String comment, User creator) {
 		try {
 			statement
 					.execute(String
@@ -53,7 +75,9 @@ public class DBDAO implements DAO {
 											.getLogin(), user.getPassword()));
 			rs = statement.getGeneratedKeys();
 			if (rs.next()) {
-				return rs.getInt(1);
+				int userId = rs.getInt(1);
+				commitEntity(user, Action.CREATE, comment, creator);
+				return userId;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -83,10 +107,10 @@ public class DBDAO implements DAO {
 	}
 
 	@Override
-	public int addStudent(Student student) {
+	public int addStudent(Student student, String comment, User creator) {
 		// TODO Auto-generated method stub
 		try {
-			int userId = addUser(student);
+			int userId = addUser(student, comment, creator);
 			statement.execute(String.format(
 					"INSERT INTO EJournal.Students VALUES (null, %d, %d, %d)",
 					userId, student.getSchoolClass().getId(),
@@ -126,6 +150,42 @@ public class DBDAO implements DAO {
 		return stud;
 	}
 
+	public List<Student> getClassList(int schoolClassId) {
+		List<Student> studentList = new ArrayList<Student>();
+		try {
+			rs = statement
+					.executeQuery(String
+							.format("SELECT * FROM EJournal.Users JOIN EJournal.Students "
+									+ "WHERE (EJournal.Students.UserId=EJournal.Users.Id) "
+									+ "and (Ejournal.Students.ClassId=%d) order by Surname",
+									schoolClassId));
+			while (rs.next()) {
+				Student student = new Student(rs.getString("Name"),
+						rs.getString("Surname"), rs.getDate("Birthdate"),
+						Sex.getSex(rs.getInt("Sex")), rs.getString("Login"),
+						rs.getString("Password"));
+				student.setId(rs.getInt("Id"));
+				studentList.add(student);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return studentList;
+	}
+
+	@Override
+	public int addSubject(Subject subject) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Subject> getSubjectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public int addTeacher(Teacher teacher) {
 		// TODO Auto-generated method stub
@@ -139,14 +199,17 @@ public class DBDAO implements DAO {
 	}
 
 	@Override
-	public int addSchoolClass(SchoolClass schoolClass) {
+	public int addSchoolClass(SchoolClass schoolClass, String comment,
+			User creator) {
 		try {
 			statement.execute(String.format(
 					"INSERT INTO EJournal.Classes VALUES (null, '%s', %d)",
 					schoolClass.getName(), schoolClass.getYear()));
 			rs = statement.getGeneratedKeys();
 			if (rs.next()) {
-				return rs.getInt(1);
+				int classId = rs.getInt(1);
+				commitEntity(schoolClass, Action.CREATE, comment, creator);
+				return classId;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
