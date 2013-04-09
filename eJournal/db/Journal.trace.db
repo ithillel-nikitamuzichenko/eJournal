@@ -944,3 +944,73 @@ SELECT * FROM EJournal.Users JOIN EJournal.Students WHERE (EJournal.Students.USE
 	at org.h2.server.web.WebThread.process(WebThread.java:166)
 	at org.h2.server.web.WebThread.run(WebThread.java:93)
 	at java.lang.Thread.run(Unknown Source)
+04-09 16:27:24 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "DISCIPLINES" не найдена
+Table "DISCIPLINES" not found; SQL statement:
+ALTER TABLE Disciplines ADD COLUMN Short_Name CHAR(12) NULL AFTER Name [42102-170]
+04-09 16:27:34 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE EJOURNAL.DISCIPLINES ADD COLUMN SHORT_NAME CHAR(12) NULL AFTER[*] NAME "
+Syntax error in SQL statement "ALTER TABLE EJOURNAL.DISCIPLINES ADD COLUMN SHORT_NAME CHAR(12) NULL AFTER[*] NAME "; SQL statement:
+ALTER TABLE Ejournal.Disciplines ADD COLUMN Short_Name CHAR(12) NULL AFTER Name [42000-170]
+04-09 16:29:03 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Неизвестный тип данных: 
+Unknown data type: ; SQL statement:
+ALTER TABLE Ejournal.Disciplines ADD COLUMN Short_Name [50004-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3653)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3516)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:4986)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:4831)
+	at org.h2.command.Parser.parseAlter(Parser.java:4314)
+	at org.h2.command.Parser.parsePrepared(Parser.java:305)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.parse(Parser.java:250)
+	at org.h2.command.Parser.prepareCommand(Parser.java:217)
+	at org.h2.engine.Session.prepareLocal(Session.java:414)
+	at org.h2.engine.Session.prepareCommand(Session.java:363)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+04-09 16:31:21 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "DISCIPLINES" не найдена
+Table "DISCIPLINES" not found; SQL statement:
+Insert into disciplines values(null, "Физкультура", "Физ-ра") [42102-170]
+04-09 16:31:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "Физкультура" не найден
+Column "Физкультура" not found; SQL statement:
+Insert into ejournal.disciplines values(null, "Физкультура", "Физ-ра") [42122-170]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:141)
+	at org.h2.command.dml.Insert.prepare(Insert.java:231)
+	at org.h2.command.Parser.prepareCommand(Parser.java:218)
+	at org.h2.engine.Session.prepareLocal(Session.java:414)
+	at org.h2.engine.Session.prepareCommand(Session.java:363)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:152)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1311)
+	at org.h2.server.web.WebApp.query(WebApp.java:1001)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:964)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:953)
+	at org.h2.server.web.WebThread.process(WebThread.java:166)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+04-09 16:56:15 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "TEACHERS" не найдена
+Table "TEACHERS" not found; SQL statement:
+drop table teachers [42102-170]
+04-09 19:23:57 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "INFORMATION_SCHEMA" не найдена
+Table "INFORMATION_SCHEMA" not found; SQL statement:
+SELECT * FROM INFORMATION_SCHEMA [42102-170]
