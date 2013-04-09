@@ -3,12 +3,12 @@ package org.hillel.it.ejournal.model.entity;
 import java.util.Date;
 
 public class User extends Entity {
-	private String name;
-	private String surname;
-	private Date birthDate;
-	private Sex sex;
-	private Role role;
-	private String login;
+	protected String name;
+	protected String surname;
+	protected Date birthDate;
+	protected Sex sex;
+	protected Role role;
+	protected String login;
 	private String password;
 
 	public User(String name, String surname, Date birthDate, Sex sex,
@@ -52,11 +52,9 @@ public class User extends Entity {
 	}
 
 	@Override
-	public String toString(){
-		return ("\nName: "+name+
-				"\nSurname: "+surname+
-				"\nDate of birth: "+birthDate+
-				"\nSex: "+sex+
-				"\nRole: "+role);
+	public String toString() {
+		return ("\nName: " + name + "\nSurname: " + surname
+				+ "\nDate of birth: " + birthDate + "\nSex: " + sex
+				+ "\nRole: " + role);
 	}
 }

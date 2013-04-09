@@ -24,4 +24,13 @@ public class Student extends User {
 			this.schoolClass = schoolClass;
 		}
 		
+		public static String stringLineHeader() {
+			return String.format("%10s%10s%12s%8s%10s", "Surname", "Name",
+					"Birthday", "Sex", "Login");
+		}
+
+		public String toStringLine() {
+			return String.format("%10s%10s%12s%8s%10s", surname, name, birthDate,
+					sex, login);
+		}
 }
