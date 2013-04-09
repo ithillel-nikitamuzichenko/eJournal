@@ -6,6 +6,9 @@ import java.util.Map;
 import org.hillel.it.ejournal.model.entity.*;
 
 public interface DAO {
+	int addUser(User user, String comment, User creator);
+	User getUser(String login, String password);
+	
 	int addStudent(Student student, String comment, User creator);
 	Student getStudent(int id);
 	List<Student> getClassList(int schoolClassId);

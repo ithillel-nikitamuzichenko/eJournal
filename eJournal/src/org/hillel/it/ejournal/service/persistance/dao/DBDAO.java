@@ -62,6 +62,7 @@ public class DBDAO implements DAO {
 		return -1;
 	}
 
+	@Override
 	public int addUser(User user, String comment, User creator) {
 		try {
 			statement
@@ -85,7 +86,8 @@ public class DBDAO implements DAO {
 		}
 		return -1;
 	}
-
+	
+	@Override
 	public User getUser(String login, String password) {
 		User user = null;
 		try {
