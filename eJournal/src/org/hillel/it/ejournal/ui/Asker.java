@@ -54,7 +54,7 @@ public class Asker {
 				System.out.print(message);
 				date = sdf.parse(scanner.nextLine());
 			} catch (ParseException e) {
-				System.out.println("������ ����� ����");
+				System.out.println("Incorrect date");
 			}
 			if ((date != null)
 					&& ((date.before(calendar.getTime())) || (date

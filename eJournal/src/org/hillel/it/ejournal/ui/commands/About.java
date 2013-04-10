@@ -6,7 +6,7 @@ import org.hillel.it.ejournal.model.entity.User;
 import org.hillel.it.ejournal.service.io.Service;
 
 public class About implements Command {
-	
+
 	public static final String ABOUT_COMMAND = "about";
 	protected Scanner scanner;
 	protected Service service;
@@ -18,7 +18,8 @@ public class About implements Command {
 	};
 
 	public static About getInstance(Scanner scanner, Service service) {
-		if ((instance == null) || (instance.scanner != scanner))
+		if ((instance == null) || (instance.scanner != scanner)
+				|| (instance.service != service))
 			instance = new About(scanner, service);
 		return instance;
 	}
@@ -27,7 +28,7 @@ public class About implements Command {
 	public String getDescription() {
 		return "show version and information about authors.";
 	}
-	
+
 	@Override
 	public boolean canExecute(User user) {
 		return true;

@@ -14,7 +14,7 @@ public class AddSubject implements Command {
 	protected Scanner scanner;
 	protected Service service;
 	private static AddSubject instance = null;
-	
+
 	private AddSubject(Scanner scanner, Service service) {
 		this.scanner = scanner;
 		this.service = service;
@@ -41,7 +41,7 @@ public class AddSubject implements Command {
 	@Override
 	public void execute(User user) {
 		if (canExecute(user)) {
-			String name = Asker.askString("Name*: ", true, scanner);			
+			String name = Asker.askString("Name*: ", true, scanner);
 			String shortName = Asker.askString("Short name: ", false, scanner);
 			Subject subject = new Subject(name, shortName);
 			int subjectId = service.addSubject(subject, "", user);

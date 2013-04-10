@@ -21,7 +21,7 @@ public class Console {
 	private Scanner scanner = new Scanner(System.in);
 	private User user = null;
 	private DAO dao = DBDAO.getInstance();
-	private Service service = new Service(dao);
+	private Service service = Service.getInstance(dao);
 
 	public Console() {
 		System.out.println("Java command line eJournal. Type 'help' for help.");

@@ -93,7 +93,8 @@ public class DBDAO implements DAO {
 		try {
 			rs = statement.executeQuery(String.format(
 					"SELECT * FROM EJournal.Users WHERE (Login = '%s') "
-							+ "AND (Password = '%s')", login, DigestUtils.md5Hex(password)));
+							+ "AND (Password = '%s')", login,
+					DigestUtils.md5Hex(password)));
 			if (rs.next()) {
 				user = new User(rs.getString("Name"), rs.getString("Surname"),
 						rs.getDate("Birthdate"), Sex.getSex(rs.getInt("Sex")),
