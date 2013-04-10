@@ -1,6 +1,6 @@
 package org.hillel.it.ejournal.main;
 
-import org.hillel.it.ejournal.service.io.ConsoleService;
+import org.hillel.it.ejournal.ui.Console;
 
 public class EJournal {
 
@@ -9,7 +9,7 @@ public class EJournal {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new ConsoleService();
+		new Console();
 		}
 
 }
