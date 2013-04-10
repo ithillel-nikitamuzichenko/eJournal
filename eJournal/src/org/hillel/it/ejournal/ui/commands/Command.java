@@ -1,4 +1,4 @@
-package org.hillel.it.ejournal.service.io.commands;
+package org.hillel.it.ejournal.ui.commands;
 
 import org.hillel.it.ejournal.model.entity.User;
 

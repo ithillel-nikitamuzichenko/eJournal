@@ -1,22 +1,25 @@
-package org.hillel.it.ejournal.service.io.commands;
+package org.hillel.it.ejournal.ui.commands;
 
 import java.util.Scanner;
 
 import org.hillel.it.ejournal.model.entity.User;
+import org.hillel.it.ejournal.service.io.Service;
 
 public class About implements Command {
+	
 	public static final String ABOUT_COMMAND = "about";
-
+	protected Scanner scanner;
+	protected Service service;
 	private static About instance = null;
-	private Scanner scanner;
 
-	private About(Scanner scanner) {
+	private About(Scanner scanner, Service service) {
 		this.scanner = scanner;
+		this.service = service;
 	};
 
-	public static About getInstance(Scanner scanner) {
+	public static About getInstance(Scanner scanner, Service service) {
 		if ((instance == null) || (instance.scanner != scanner))
-			instance = new About(scanner);
+			instance = new About(scanner, service);
 		return instance;
 	}
 

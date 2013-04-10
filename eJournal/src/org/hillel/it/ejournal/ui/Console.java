@@ -1,15 +1,16 @@
-package org.hillel.it.ejournal.service.io;
+package org.hillel.it.ejournal.ui;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import org.hillel.it.ejournal.model.entity.User;
-import org.hillel.it.ejournal.service.io.commands.*;
+import org.hillel.it.ejournal.service.io.Service;
 import org.hillel.it.ejournal.service.persistance.dao.DAO;
 import org.hillel.it.ejournal.service.persistance.dao.DBDAO;
+import org.hillel.it.ejournal.ui.commands.*;
 
-public class ConsoleService {
+public class Console {
 
 	private static final String HELP_COMMAND = "HELP";
 	private static final String EXIT_COMMAND = "EXIT";
@@ -17,28 +18,28 @@ public class ConsoleService {
 
 	private Map<String, Command> commands = new HashMap<String, Command>();
 	private int exitFlag = 0;
-
 	private Scanner scanner = new Scanner(System.in);
-
 	private User user = null;
-	
 	private DAO dao = DBDAO.getInstance();
+	private Service service = new Service(dao);
 
-	public ConsoleService() {
+	public Console() {
 		System.out.println("Java command line eJournal. Type 'help' for help.");
 
-		commands.put(About.ABOUT_COMMAND, About.getInstance(scanner));
-		commands.put(AddClass.ADDCLASS_COMMAND, AddClass.getInstance(scanner));
+		commands.put(About.ABOUT_COMMAND, 
+				About.getInstance(scanner, service));
+		commands.put(AddClass.ADDCLASS_COMMAND,
+				AddClass.getInstance(scanner, service));
 		commands.put(AddStudent.ADDSTUDENT_COMMAND,
-				AddStudent.getInstance(scanner));
+				AddStudent.getInstance(scanner, service));
 		commands.put(ShowClasses.SHOWCLASSES_COMMAND,
-				ShowClasses.getInstance(scanner));
+				ShowClasses.getInstance(scanner, service));
 		commands.put(ShowClass.SHOWCLASS_COMMAND,
-				ShowClass.getInstance(scanner));
+				ShowClass.getInstance(scanner, service));
 		commands.put(AddSubject.ADDSUBJECT_COMMAND,
-				AddSubject.getInstance(scanner));
+				AddSubject.getInstance(scanner, service));
 		commands.put(AddTeacher.ADDTEACHER_COMMAND,
-				AddTeacher.getInstance(scanner));
+				AddTeacher.getInstance(scanner, service));
 		do {
 			interpretCommand(getCommand());
 		} while (exitFlag == 0);

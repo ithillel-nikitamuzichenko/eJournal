@@ -1,4 +1,4 @@
-package org.hillel.it.ejournal.service.io;
+package org.hillel.it.ejournal.ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,7 +54,7 @@ public class Asker {
 				System.out.print(message);
 				date = sdf.parse(scanner.nextLine());
 			} catch (ParseException e) {
-				System.out.println("Ошибка ввода даты");
+				System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 			}
 			if ((date != null)
 					&& ((date.before(calendar.getTime())) || (date
