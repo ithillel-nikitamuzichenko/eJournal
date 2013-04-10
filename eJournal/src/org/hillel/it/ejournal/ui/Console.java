@@ -28,6 +28,8 @@ public class Console {
 
 		commands.put(About.ABOUT_COMMAND, 
 				About.getInstance(scanner, service));
+		commands.put(Whoami.WHOAMI_COMMAND, 
+				Whoami.getInstance(scanner, service));
 		commands.put(AddClass.ADDCLASS_COMMAND,
 				AddClass.getInstance(scanner, service));
 		commands.put(AddStudent.ADDSTUDENT_COMMAND,
@@ -92,7 +94,6 @@ public class Console {
 				System.out.println(String.format("%s - %s", key, value));
 			}
 		}
-
 	}
 
 	private void makeLogin() {

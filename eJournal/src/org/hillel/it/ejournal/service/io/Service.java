@@ -1,7 +1,6 @@
 package org.hillel.it.ejournal.service.io;
 
 import java.util.List;
-import java.util.Map;
 
 import org.hillel.it.ejournal.model.entity.*;
 import org.hillel.it.ejournal.service.persistance.dao.DAO;
@@ -70,7 +69,7 @@ public class Service {
 		return dao.getSchoolClass(year, name);
 	}
 
-	public Map<Integer, SchoolClass> getSchoolClasses() {
+	public List<SchoolClass> getSchoolClasses() {
 		return dao.getSchoolClasses();
 	}
 

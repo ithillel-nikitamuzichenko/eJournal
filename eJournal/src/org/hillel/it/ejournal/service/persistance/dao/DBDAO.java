@@ -7,13 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hillel.it.ejournal.main.AppSettings;
 import org.hillel.it.ejournal.model.entity.*;
+import org.hillel.it.ejournal.service.io.Service;
 
 public class DBDAO implements DAO {
 
@@ -260,7 +259,7 @@ public class DBDAO implements DAO {
 					"SELECT * FROM EJournal.Classes WHERE ID = %d", id));
 			if (rs.next()) {
 				schoolClass = new SchoolClass(rs.getString("Name"),
-						rs.getInt("Year"));
+						rs.getInt("Year"), Service.getInstance(this));
 				schoolClass.setId(id);
 			}
 		} catch (SQLException e) {
@@ -278,7 +277,7 @@ public class DBDAO implements DAO {
 							.format("SELECT * FROM EJournal.Classes WHERE (Year = %d) AND (Name = '%s')",
 									year, name));
 			if (rs.next()) {
-				schoolClass = new SchoolClass(name, year);
+				schoolClass = new SchoolClass(name, year, Service.getInstance(this));
 				schoolClass.setId(rs.getInt("ID"));
 			}
 		} catch (SQLException e) {
@@ -288,15 +287,15 @@ public class DBDAO implements DAO {
 	}
 
 	@Override
-	public Map<Integer, SchoolClass> getSchoolClasses() {
-		Map<Integer, SchoolClass> schoolClasses = new HashMap<Integer, SchoolClass>();
+	public List<SchoolClass> getSchoolClasses() {
+		List<SchoolClass> schoolClasses = new ArrayList<SchoolClass>();
 		try {
-			rs = statement.executeQuery("SELECT * FROM EJournal.Classes");
+			rs = statement.executeQuery("SELECT * FROM EJournal.Classes ORDER BY YEAR, NAME");
 			while (rs.next()) {
 				SchoolClass schoolClass = new SchoolClass(rs.getString("Name"),
-						rs.getInt("Year"));
+						rs.getInt("Year"), Service.getInstance(this));
 				schoolClass.setId(rs.getInt("ID"));
-				schoolClasses.put(schoolClass.getId(), schoolClass);
+				schoolClasses.add(schoolClass);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

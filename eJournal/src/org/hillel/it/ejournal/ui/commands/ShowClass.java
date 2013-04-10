@@ -49,9 +49,9 @@ public class ShowClass implements Command {
 				schoolClass = service.getSchoolClass(classId);
 			} while (schoolClass == null);
 			List<Student> students = service.getClassList(classId);
-			System.out.println(Student.stringLineHeader());
+			System.out.println(Student.stringHeader());
 			for (int index = 0; index < students.size(); index++) {
-				System.out.println(students.get(index).toStringLine());
+				System.out.println(students.get(index).toString());
 			}
 		} else {
 			System.out.println("Not enough permission. Access denided.");

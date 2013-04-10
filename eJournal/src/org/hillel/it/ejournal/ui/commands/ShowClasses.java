@@ -1,6 +1,7 @@
 package org.hillel.it.ejournal.ui.commands;
 
-import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import org.hillel.it.ejournal.model.entity.SchoolClass;
@@ -40,14 +41,11 @@ public class ShowClasses implements Command {
 	@Override
 	public void execute(User user) {
 		if (canExecute(user)) {
-			Map<Integer, SchoolClass> schoolClasses = service
-					.getSchoolClasses();
-			for (Map.Entry<Integer, SchoolClass> entry : schoolClasses
-					.entrySet()) {
-				Integer key = entry.getKey();
-				SchoolClass value = entry.getValue();
-				System.out.println(String.format("%d - %s", key,
-						value.toString()));
+			List<SchoolClass> schoolClasses = service.getSchoolClasses();
+			Iterator<SchoolClass> iterator = schoolClasses.iterator();
+			System.out.println(SchoolClass.stringHeader());
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next().toString());
 			}
 		} else {
 			System.out.println("Not enough permission. Access denided.");

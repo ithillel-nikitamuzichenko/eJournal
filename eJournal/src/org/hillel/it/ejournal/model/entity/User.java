@@ -73,10 +73,9 @@ public class User implements Entity {
 		return password;
 	}
 
-	@Override
-	public String toString() {
-		return ("\nName: " + name + "\nSurname: " + surname
-				+ "\nDate of birth: " + birthDate + "\nSex: " + sex
-				+ "\nRole: " + role);
+	public String getInfoString() {
+		return (String.format(
+				"Name: %s\nSurname: %s\nDate of birth: %s\nSex: %s\nRole: %s",
+				name, surname, birthDate, sex, role));
 	}
 }

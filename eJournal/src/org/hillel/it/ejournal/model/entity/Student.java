@@ -24,13 +24,14 @@ public class Student extends User {
 			this.schoolClass = schoolClass;
 		}
 		
-		public static String stringLineHeader() {
-			return String.format("%10s%10s%12s%8s%10s", "Surname", "Name",
+		public static String stringHeader() {
+			return String.format("%5s%10s%10s%12s%8s%10s", "id", "Surname", "Name",
 					"Birthday", "Sex", "Login");
 		}
-
-		public String toStringLine() {
-			return String.format("%10s%10s%12s%8s%10s", surname, name, birthDate,
+		
+		@Override
+		public String toString() {
+			return String.format("%5d%10s%10s%12s%8s%10s", id, surname, name, birthDate,
 					sex, login);
 		}
 }

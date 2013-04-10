@@ -43,7 +43,7 @@ public class AddClass implements Command {
 		if (canExecute(user)) {
 			String name = Asker.askString("Name*: ", true, scanner);
 			Integer year = Asker.askInteger("Year*: ", true, 1, 11, scanner);
-			SchoolClass schoolClass = new SchoolClass(name, year);
+			SchoolClass schoolClass = new SchoolClass(name, year, service);
 			int classId = service.addSchoolClass(schoolClass, "", user);
 			System.out
 					.println(String.format("Class id=%d was added.", classId));
