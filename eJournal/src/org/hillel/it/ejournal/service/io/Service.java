@@ -14,11 +14,18 @@ import org.hillel.it.ejournal.model.entity.User;
 import org.hillel.it.ejournal.service.persistance.dao.DAO;
 
 public class Service implements DAO {
+
+	private static Service instance = null;
 	private DAO dao;
 
-	public Service(DAO dao) {
-		super();
+	private Service(DAO dao) {
 		this.dao = dao;
+	};
+
+	public static Service getInstance(DAO dao) {
+		if ((instance == null) || (instance.dao != dao))
+			instance = new Service(dao);
+		return instance;
 	}
 
 	@Override
